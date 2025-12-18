@@ -1,0 +1,156 @@
+{
+	"info": {
+		"_postman_id": "c6aaa60c-9f40-4ac0-ae26-4937f02602f0",
+		"name": "Atividade Final - API (DummyJSON)",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "50697415",
+		"_collection_link": "https://euandremas-3986966.postman.co/workspace/Andr%C3%A9-Moreira-Ara%C3%BAjo-dos-Santos~63eef169-f8c6-4566-8345-1ad0c1173fb1/collection/50697415-c6aaa60c-9f40-4ac0-ae26-4937f02602f0?action=share&source=collection_link&creator=50697415"
+	},
+	"item": [
+		{
+			"name": "AtualizarProduto",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"// Visualization Script",
+							"// Visualization Script",
+							"// Visualizer script to render product metrics",
+							"var template = `",
+							"<div style=\"max-width: 720px; margin: 0 auto;\">",
+							"  <canvas id=\"productChart\" height=\"120\"></canvas>",
+							"</div>",
+							"<script src=\"https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.9.4/Chart.min.js\"></script>",
+							"<script>",
+							"  (function(){",
+							"    var ctx = document.getElementById('productChart').getContext('2d');",
+							"    pm.getData(function (err, data) {",
+							"      if (err) {",
+							"        return;",
+							"      }",
+							"      var values = (data && data.response) ? data.response : {};",
+							"      var labels = ['Price','Rating','Stock'];",
+							"      var dataset = [values.price || 0, values.rating || 0, values.stock || 0];",
+							"      var title = values.title || 'Product Metrics';",
+							"",
+							"      new Chart(ctx, {",
+							"        type: 'bar',",
+							"        data: {",
+							"          labels: labels,",
+							"          datasets: [{",
+							"            label: title,",
+							"            backgroundColor: ['#4e79a7','#f28e2b','#e15759'],",
+							"            borderColor: ['#3b5f86','#bf6d14','#b0433f'],",
+							"            borderWidth: 1,",
+							"            data: dataset",
+							"          }]",
+							"        },",
+							"        options: {",
+							"          responsive: true,",
+							"          maintainAspectRatio: false,",
+							"          legend: { display: false },",
+							"          title: { display: true, text: title },",
+							"          scales: {",
+							"            yAxes: [{ ticks: { beginAtZero: true } }]",
+							"          }",
+							"        }",
+							"      });",
+							"    });",
+							"  })();",
+							"</script>",
+							"`;",
+							"",
+							"function createPayload() {",
+							"  // 1) Parse response JSON",
+							"  var json = pm.response.json();",
+							"  // 2) Extract product fields (ensure shape compatibility)",
+							"  var payload = {",
+							"    title: json && json.title ? json.title : 'Product Metrics',",
+							"    price: (json && typeof json.price === 'number') ? json.price : 0,",
+							"    rating: (json && typeof json.rating === 'number') ? json.rating : 0,",
+							"    stock: (json && typeof json.stock === 'number') ? json.stock : 0",
+							"  };",
+							"  return { response: payload };",
+							"}",
+							"",
+							"// 5) Set the visualizer with template and data payload",
+							"pm.visualizer.set(template, createPayload());"
+						],
+						"type": "text/javascript",
+						"packages": {},
+						"requests": {}
+					}
+				}
+			],
+			"request": {
+				"method": "PUT",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					},
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"iPhone Galaxy +1\"\r\n  }",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "https://dummyjson.com/products/1",
+					"protocol": "https",
+					"host": [
+						"dummyjson",
+						"com"
+					],
+					"path": [
+						"products",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X PUT \"https://dummyjson.com/products/1\" \\\r\n  -H \"Content-Type: application/json\" \\\r\n  -H \"Accept: application/json\" \\\r\n  -d '{\r\n    \"title\": \"iPhone Galaxy +1\"\r\n  }'\r\n"
+			},
+			"response": []
+		},
+		{
+			"name": "RemoverProduto",
+			"request": {
+				"method": "DELETE",
+				"header": [
+					{
+						"key": "Accept",
+						"value": "application/json"
+					}
+				],
+				"url": {
+					"raw": "https://dummyjson.com/products/1",
+					"protocol": "https",
+					"host": [
+						"dummyjson",
+						"com"
+					],
+					"path": [
+						"products",
+						"1"
+					]
+				},
+				"description": "Generated from cURL: curl -X DELETE \"https://dummyjson.com/products/1\" \\\r\n  -H \"Accept: application/json\"\r\n"
+			},
+			"response": []
+		}
+	],
+	"variable": [
+		{
+			"key": "accessToken",
+			"value": ""
+		}
+	]
+}
