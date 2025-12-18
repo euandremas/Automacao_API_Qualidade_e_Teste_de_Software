@@ -92,8 +92,6 @@ Em todas as requisições foram aplicadas, no mínimo, as seguintes validações
 - Postman instalado  
 - Newman instalado globalmente  
 
-```bash
-
 2️⃣ Executar a automação via terminal
 
 Na pasta onde está o arquivo da collection:
