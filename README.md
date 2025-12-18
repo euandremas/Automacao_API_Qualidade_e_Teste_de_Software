@@ -93,7 +93,6 @@ Em todas as requisições foram aplicadas, no mínimo, as seguintes validações
 - Newman instalado globalmente  
 
 ```bash
-npm install -g newman
 
 2️⃣ Executar a automação via terminal
 
